@@ -1,29 +1,29 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, MapPin, User, LogOut, Settings, Trophy, AlertTriangle } from 'lucide-react';
+import { Menu, X, MapPin, User, LogOut, Settings, Trophy } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import clsx from 'clsx';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
   const { user, logout, isAdmin } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    setShowLogoutModal(true);
+    setShowLogoutConfirm(true);
   };
 
   const confirmLogout = () => {
     logout();
     navigate('/');
     setIsOpen(false);
-    setShowLogoutModal(false);
+    setShowLogoutConfirm(false);
   };
 
   const cancelLogout = () => {
-    setShowLogoutModal(false);
+    setShowLogoutConfirm(false);
   };
 
   const navLinks = [
@@ -38,7 +38,8 @@ const Navbar = () => {
   ] : [];
 
   return (
-    <nav className="bg-gray-800/95 backdrop-blur-sm border-b border-gray-700/50 sticky top-0 z-50">
+    <>
+      <nav className="bg-gray-800/95 backdrop-blur-sm border-b border-gray-700/50 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link to="/" className="flex items-center space-x-2 group">
@@ -176,28 +177,24 @@ const Navbar = () => {
           </div>
         </div>
       )}
+      </nav>
 
       {/* Logout Confirmation Modal */}
-      {showLogoutModal && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[60] p-4">
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-800 border border-gray-700 rounded-xl p-6 max-w-md w-full">
-            <div className="flex items-center mb-4">
-              <AlertTriangle className="h-6 w-6 text-yellow-400 mr-3 flex-shrink-0" />
-              <h3 className="text-lg font-semibold text-white">Confirm Logout</h3>
-            </div>
-            <p className="text-gray-300 mb-6 text-center">
-              Are you sure you want to logout? You'll need to sign in again to access your account.
-            </p>
-            <div className="flex space-x-3 justify-center">
+      {showLogoutConfirm && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-gray-800 border border-gray-700 rounded-lg p-6 max-w-sm w-full">
+            <h3 className="text-lg font-semibold text-white mb-4">Confirm Logout</h3>
+            <p className="text-gray-300 mb-6">Are you sure you want to logout?</p>
+            <div className="flex space-x-3">
               <button
                 onClick={cancelLogout}
-                className="px-6 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-colors font-medium"
+                className="flex-1 px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-colors"
               >
                 Cancel
               </button>
               <button
                 onClick={confirmLogout}
-                className="px-6 py-2 bg-red-600 hover:bg-red-500 text-white rounded-lg transition-colors font-medium"
+                className="flex-1 px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded-lg transition-colors"
               >
                 Logout
               </button>
@@ -205,7 +202,7 @@ const Navbar = () => {
           </div>
         </div>
       )}
-    </nav>
+    </>
   );
 };
 

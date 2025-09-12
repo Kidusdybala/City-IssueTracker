@@ -2,15 +2,15 @@ class IssueService {
   issues = [
     {
       id: '1',
-      title: 'Large pothole on Main Street',
+      title: 'Large pothole on Bole Road',
       description: 'Deep pothole causing vehicle damage near intersection',
       category: 'road',
       status: 'pending',
       priority: 'high',
       location: {
-        latitude: 40.7128,
-        longitude: -74.0060,
-        address: '123 Main Street, New York, NY'
+        latitude: 9.1450,
+        longitude: 38.7223,
+        address: '123 Bole Road, Addis Ababa, Ethiopia'
       },
       photos: ['https://images.pexels.com/photos/2050718/pexels-photo-2050718.jpeg'],
       reporterId: '1',
@@ -25,9 +25,9 @@ class IssueService {
       status: 'in-progress',
       priority: 'medium',
       location: {
-        latitude: 40.7180,
-        longitude: -74.0020,
-        address: '456 Oak Avenue, New York, NY'
+        latitude: 9.1500,
+        longitude: 38.7300,
+        address: '456 Churchill Avenue, Addis Ababa, Ethiopia'
       },
       photos: ['https://images.pexels.com/photos/2346091/pexels-photo-2346091.jpeg'],
       reporterId: '1',
@@ -43,9 +43,9 @@ class IssueService {
       status: 'resolved',
       priority: 'low',
       location: {
-        latitude: 40.7200,
-        longitude: -74.0100,
-        address: '789 Pine Street, New York, NY'
+        latitude: 9.1400,
+        longitude: 38.7200,
+        address: '789 Piazza, Addis Ababa, Ethiopia'
       },
       photos: ['https://images.pexels.com/photos/2106037/pexels-photo-2106037.jpeg'],
       reporterId: '1',
