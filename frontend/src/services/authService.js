@@ -3,7 +3,7 @@ class AuthService {
     {
       id: '1',
       email: 'citizen@example.com',
-      name: 'John Citizen',
+      name: 'Abebe Tadesse',
       role: 'citizen',
       points: 150,
       badges: [
@@ -20,7 +20,7 @@ class AuthService {
     {
       id: '2',
       email: 'official@city.gov',
-      name: 'City Official',
+      name: ' Official',
       role: 'admin',
       points: 0,
       badges: [],
@@ -65,7 +65,19 @@ class AuthService {
 
   async getCurrentUser() {
     const userData = localStorage.getItem('currentUser');
-    return userData ? JSON.parse(userData) : null;
+    if (userData) {
+      const user = JSON.parse(userData);
+      // Update old names to new Ethiopian names
+      if (user.name === 'John Citizen') {
+        user.name = 'Abebe Tadesse';
+        localStorage.setItem('currentUser', JSON.stringify(user));
+      } else if (user.name === 'City Official') {
+        user.name = 'Addis Ababa Official';
+        localStorage.setItem('currentUser', JSON.stringify(user));
+      }
+      return user;
+    }
+    return null;
   }
 
   logout() {

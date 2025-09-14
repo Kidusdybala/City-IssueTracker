@@ -10,7 +10,7 @@ class IssueService {
       location: {
         latitude: 9.1450,
         longitude: 38.7223,
-        address: '123 Bole Road, Addis Ababa, Ethiopia'
+        address: '123 Bole Road, , Ethiopia'
       },
       photos: ['https://images.pexels.com/photos/2050718/pexels-photo-2050718.jpeg'],
       reporterId: '1',
@@ -27,7 +27,7 @@ class IssueService {
       location: {
         latitude: 9.1500,
         longitude: 38.7300,
-        address: '456 Churchill Avenue, Addis Ababa, Ethiopia'
+        address: '456 Churchill Avenue, , Ethiopia'
       },
       photos: ['https://images.pexels.com/photos/2346091/pexels-photo-2346091.jpeg'],
       reporterId: '1',
@@ -45,7 +45,7 @@ class IssueService {
       location: {
         latitude: 9.1400,
         longitude: 38.7200,
-        address: '789 Piazza, Addis Ababa, Ethiopia'
+        address: '789 Piazza, , Ethiopia'
       },
       photos: ['https://images.pexels.com/photos/2106037/pexels-photo-2106037.jpeg'],
       reporterId: '1',

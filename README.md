@@ -27,6 +27,28 @@ A comprehensive MERN stack application designed to streamline citizen-city gover
 - **Responsive Design**: Optimized for desktop and mobile devices
 - **Data Security**: Encrypted authentication and secure data handling
 
+## 📸 Screenshots
+
+### Dashboard
+![Dashboard Screenshot](screenshots/dashboard.png)
+*The main dashboard showing user statistics, recent reports, and achievements.*
+
+### Issue Reporting
+![Report Issue Screenshot](screenshots/report-issue.png)
+*User-friendly interface for reporting new issues with photo upload.*
+
+### Leaderboard
+![Leaderboard Screenshot](screenshots/leaderboard.png)
+*Community leaderboard showcasing top contributors and achievements.*
+
+### Admin Dashboard
+![Admin Dashboard Screenshot](screenshots/admin-dashboard.png)
+*Administrative interface for managing issues and monitoring performance.*
+
+### Map View
+![Map View Screenshot](screenshots/map-view.png)
+*Interactive map displaying reported issues geographically.*
+
 ## 🛠️ Technology Stack
 
 ### Backend
@@ -205,6 +227,7 @@ City-IssueTracker/
 │   ├── package.json          # Frontend dependencies
 │   └── vite.config.js        # Vite configuration
 ├── .gitignore               # Git ignore rules
+├── screenshots/             # Application screenshots
 └── README.md                # Project documentation
 ```
 

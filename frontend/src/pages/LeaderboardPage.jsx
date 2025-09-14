@@ -4,14 +4,14 @@ import { Trophy, Medal, Award, Star, Crown, Target, TrendingUp } from 'lucide-re
 const LeaderboardPage = () => {
   // Mock leaderboard data
   const topReporters = [
-    { id: '1', name: 'Sarah Chen', points: 1250, reports: 45, resolved: 38, badge: '👑', rank: 1 },
-    { id: '2', name: 'Mike Johnson', points: 980, reports: 35, resolved: 29, badge: '🥈', rank: 2 },
-    { id: '3', name: 'Emily Rodriguez', points: 850, reports: 30, resolved: 26, badge: '🥉', rank: 3 },
-    { id: '4', name: 'David Kim', points: 720, reports: 28, resolved: 22, badge: '🏆', rank: 4 },
-    { id: '5', name: 'Lisa Wang', points: 650, reports: 24, resolved: 20, badge: '⭐', rank: 5 },
-    { id: '6', name: 'John Smith', points: 580, reports: 22, resolved: 18, badge: '🎯', rank: 6 },
-    { id: '7', name: 'Maria Garcia', points: 520, reports: 19, resolved: 16, badge: '🚀', rank: 7 },
-    { id: '8', name: 'Alex Thompson', points: 480, reports: 17, resolved: 14, badge: '💫', rank: 8 },
+    { id: '1', name: 'Worknesh Abeba', points: 1250, reports: 45, resolved: 38, badge: '👑', rank: 1 },
+    { id: '2', name: 'Abebe Kebede', points: 980, reports: 35, resolved: 29, badge: '🥈', rank: 2 },
+    { id: '3', name: 'Genet Tadesse', points: 850, reports: 30, resolved: 26, badge: '🥉', rank: 3 },
+    { id: '4', name: 'Solomon Haile', points: 720, reports: 28, resolved: 22, badge: '🏆', rank: 4 },
+    { id: '5', name: 'Abeba Worku', points: 650, reports: 24, resolved: 20, badge: '⭐', rank: 5 },
+    { id: '6', name: 'Tadesse Mengistu', points: 580, reports: 22, resolved: 18, badge: '🎯', rank: 6 },
+    { id: '7', name: 'Adanech Bekele', points: 520, reports: 19, resolved: 16, badge: '🚀', rank: 7 },
+    { id: '8', name: 'Yohannes Desta', points: 480, reports: 17, resolved: 14, badge: '💫', rank: 8 },
   ];
 
   const achievements = [
