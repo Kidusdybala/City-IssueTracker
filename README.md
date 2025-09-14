@@ -36,28 +36,28 @@
 ## 📸 Screenshots
 
 ### Citizen Dashboard
-![Citizen Dashboard Screenshot](frontend/public/citizen%20dashboard.png)
-*The main dashboard for citizens showing user statistics, recent reports, and achievements.*
+![Screenshot of the citizen dashboard displaying user statistics, recent issue reports, and earned achievements](frontend/public/citizen%20dashboard.png)
+*The citizen dashboard provides a comprehensive overview of user activity, including key statistics on reported issues, recent submissions with their status, and achievements earned through active community participation. It serves as the central hub for citizens to track their contributions and stay engaged with local governance.*
 
 ### Citizen Leaderboard
-![Citizen Leaderboard Screenshot](frontend/public/citizen%20leaderboard.png)
-*Community leaderboard showcasing top citizen contributors and achievements.*
+![Screenshot of the community leaderboard highlighting top citizen contributors and their achievements](frontend/public/citizen%20leaderboard.png)
+*The community leaderboard showcases top contributors, displaying their ranking based on issue reports and community engagement. This gamification feature encourages participation by recognizing citizens who actively help improve their city through detailed reporting and feedback.*
 
 ### Issue Reporting
-![Issue Reporting Screenshot](frontend/public/citizens%20issue%20report.png)
-*User-friendly interface for reporting new issues with photo upload.*
+![Screenshot of the intuitive issue reporting interface with photo upload and location features](frontend/public/citizens%20issue%20report.png)
+*The issue reporting page offers a user-friendly form for citizens to submit urban problems. It includes fields for detailed descriptions, photo uploads for visual evidence, automatic GPS location tagging, and category selection to ensure comprehensive and accurate issue documentation.*
 
 ### Official Leaderboard Tracker
-![Official Leaderboard Tracker Screenshot](frontend/public/offical%20leaderboard%20tracker.png)
-*Official view of the leaderboard tracking community contributions.*
+![Screenshot of the official leaderboard tracker for monitoring citizen contributions and community engagement](frontend/public/official%20leaderboard%20tracker.png)
+*City officials can access this tracker to view and monitor community contributions through the leaderboard system. It provides insights into citizen participation levels and helps identify active community members who contribute significantly to local issue resolution.*
 
 ### Official Dashboard
-![Official Dashboard Screenshot](frontend/public/official%20dashboard.png)
-*Administrative interface for managing issues and monitoring performance.*
+![Screenshot of the administrative dashboard for comprehensive issue management and performance analytics](frontend/public/official%20dashboard.png)
+*The official dashboard is the primary interface for city administrators to manage reported issues. It features advanced filtering options, bulk operations for efficient status updates, priority assignments, and detailed analytics on resolution metrics and departmental performance.*
 
 ### Official Reported Page
-![Official Reported Page Screenshot](frontend/public/official%20reported%20page.png)
-*Official page showing reported issues and their status.*
+![Screenshot of the official reported issues page with filtering and status tracking capabilities](frontend/public/official%20reported%20page.png)
+*This page displays all reported issues in a structured format, allowing officials to filter by status, priority, category, and location. It provides quick access to issue details, status updates, and resolution notes for streamlined issue management and tracking.*
 
 ## 🛠️ Technology Stack
 
@@ -242,7 +242,7 @@ City-IssueTracker/
 │   │   ├── citizen dashboard.png     # Citizen dashboard screenshot
 │   │   ├── citizen leaderboard.png   # Citizen leaderboard screenshot
 │   │   ├── citizens issue report.png # Issue reporting screenshot
-│   │   ├── offical leaderboard tracker.png # Official leaderboard tracker
+│   │   ├── official leaderboard tracker.png # Official leaderboard tracker
 │   │   ├── official dashboard.png    # Official dashboard screenshot
 │   │   └── official reported page.png # Official reported page screenshot
 │   └── ...                  # Other frontend files
