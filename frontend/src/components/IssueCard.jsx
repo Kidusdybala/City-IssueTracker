@@ -1,6 +1,7 @@
 import React from 'react';
 import { MapPin, Clock, User, AlertCircle } from 'lucide-react';
-import { formatDistanceToNow } from 'date-fns';
+import { ISSUE_STATUSES, ISSUE_PRIORITIES } from '../constants/categories';
+import { formatRelativeTime, getStatusColor, getPriorityColor } from '../utils/helpers';
 import clsx from 'clsx';
 
 const IssueCard = ({
@@ -9,19 +10,7 @@ const IssueCard = ({
   onStatusUpdate,
   onPriorityUpdate
 }) => {
-  const statusColors = {
-    pending: 'from-yellow-500/20 to-yellow-600/20 border-yellow-500/30 text-yellow-300',
-    'in-progress': 'from-blue-500/20 to-blue-600/20 border-blue-500/30 text-blue-300',
-    resolved: 'from-green-500/20 to-green-600/20 border-green-500/30 text-green-300',
-    rejected: 'from-red-500/20 to-red-600/20 border-red-500/30 text-red-300',
-  };
-
-  const priorityColors = {
-    low: 'text-gray-400',
-    medium: 'text-yellow-400',
-    high: 'text-orange-400',
-    urgent: 'text-red-400',
-  };
+  // Using helper functions for consistent styling
 
   const categoryIcons = {
     road: '🛣️',
@@ -44,7 +33,7 @@ const IssueCard = ({
           <p className="text-gray-400 text-sm mb-3 line-clamp-2">{issue.description}</p>
         </div>
         
-        <div className={`px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r ${statusColors[issue.status]} border`}>
+        <div className={`px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r ${getStatusColor(issue.status)} border`}>
           {issue.status.charAt(0).toUpperCase() + issue.status.slice(1).replace('-', ' ')}
         </div>
       </div>
@@ -57,11 +46,11 @@ const IssueCard = ({
           </div>
           <div className="flex items-center space-x-1">
             <Clock className="h-4 w-4" />
-            <span>{formatDistanceToNow(issue.createdAt)} ago</span>
+            <span>{formatRelativeTime(issue.createdAt)}</span>
           </div>
         </div>
         
-        <div className={`flex items-center space-x-1 ${priorityColors[issue.priority]}`}>
+        <div className={`flex items-center space-x-1 ${getPriorityColor(issue.priority)}`}>
           <AlertCircle className="h-4 w-4" />
           <span className="capitalize">{issue.priority}</span>
         </div>

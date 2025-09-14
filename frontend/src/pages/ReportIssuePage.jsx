@@ -2,6 +2,8 @@ import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Camera, MapPin, Upload, X, Plus, CheckCircle } from 'lucide-react';
 import { useIssues } from '../contexts/IssueContext';
+import { ISSUE_CATEGORIES } from '../constants/categories';
+import PageLayout from '../layouts/PageLayout';
 
 const ReportIssuePage = () => {
   const [formData, setFormData] = useState({
@@ -19,15 +21,7 @@ const ReportIssuePage = () => {
   const { createIssue } = useIssues();
   const navigate = useNavigate();
 
-  const categories = [
-    { value: 'road', label: 'Roads & Infrastructure', icon: '🛣️', color: 'from-blue-500 to-blue-600' },
-    { value: 'waste', label: 'Waste Management', icon: '🗑️', color: 'from-green-500 to-green-600' },
-    { value: 'electricity', label: 'Electricity & Lighting', icon: '⚡', color: 'from-yellow-500 to-yellow-600' },
-    { value: 'water', label: 'Water & Sewage', icon: '💧', color: 'from-cyan-500 to-cyan-600' },
-    { value: 'parks', label: 'Parks & Recreation', icon: '🌳', color: 'from-emerald-500 to-emerald-600' },
-    { value: 'safety', label: 'Public Safety', icon: '🚨', color: 'from-red-500 to-red-600' },
-    { value: 'other', label: 'Other', icon: '📝', color: 'from-gray-500 to-gray-600' },
-  ];
+  const categories = ISSUE_CATEGORIES;
 
   const getCurrentLocation = () => {
     setLocationLoading(true);
