@@ -10,6 +10,50 @@ const app = express();
 // Connect to database
 connectDB();
 
+// Auto-seed demo users on startup (only in development or if explicitly enabled)
+if (process.env.NODE_ENV === 'development' || process.env.SEED_DEMO_USERS === 'true') {
+  const seedDemoUsers = async () => {
+    try {
+      const User = require('./models/User');
+
+      const demoUsers = [
+        {
+          name: 'Abebe Tadesse',
+          email: 'citizen@example.com',
+          password: 'password',
+          role: 'user',
+          points: 150,
+          badges: ['First Reporter'],
+          isActive: true
+        },
+        {
+          name: 'Addis Ababa Official',
+          email: 'official@city.gov',
+          password: 'password',
+          role: 'admin',
+          points: 0,
+          badges: [],
+          isActive: true
+        }
+      ];
+
+      for (const userData of demoUsers) {
+        const existingUser = await User.findOne({ email: userData.email });
+        if (!existingUser) {
+          const user = new User(userData);
+          await user.save();
+          console.log(`✅ Auto-created demo user: ${userData.email}`);
+        }
+      }
+    } catch (error) {
+      console.log('⚠️  Could not auto-seed demo users:', error.message);
+    }
+  };
+
+  // Seed users after database connection
+  setTimeout(seedDemoUsers, 2000); // Wait 2 seconds for DB connection
+}
+
 // Security middleware
 app.use(helmet({
   crossOriginResourcePolicy: { policy: "cross-origin" }

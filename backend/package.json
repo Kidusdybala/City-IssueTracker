@@ -12,6 +12,7 @@
     "dev": "NODE_ENV=development nodemon server.js",
     "build": "echo 'No build step required for Node.js backend'",
     "test": "jest",
+    "seed": "node scripts/seedUsers.js",
     "heroku-postbuild": "echo 'Backend build complete'"
   },
   "keywords": ["mern", "city", "issues", "tracker", "api", "express", "mongodb"],
