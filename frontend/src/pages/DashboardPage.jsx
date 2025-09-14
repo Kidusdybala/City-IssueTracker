@@ -172,7 +172,7 @@ const DashboardPage = () => {
                 <div className="flex justify-between items-center">
                   <span className="text-gray-400">Member since</span>
                   <span className="text-white">
-                    {formatDistanceToNow(user.createdAt)} ago
+                    {user.createdAt ? formatDistanceToNow(new Date(user.createdAt)) : 'Recently'} ago
                   </span>
                 </div>
                 
