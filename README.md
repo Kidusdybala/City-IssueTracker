@@ -35,25 +35,29 @@
 
 ## 📸 Screenshots
 
-### Dashboard
-![Dashboard Screenshot](https://via.placeholder.com/800x600/4f46e5/ffffff?text=Dashboard+Screenshot)
-*The main dashboard showing user statistics, recent reports, and achievements.*
+### Citizen Dashboard
+![Citizen Dashboard Screenshot](frontend/public/citizen%20dashboard.png)
+*The main dashboard for citizens showing user statistics, recent reports, and achievements.*
+
+### Citizen Leaderboard
+![Citizen Leaderboard Screenshot](frontend/public/citizen%20leaderboard.png)
+*Community leaderboard showcasing top citizen contributors and achievements.*
 
 ### Issue Reporting
-![Report Issue Screenshot](https://via.placeholder.com/800x600/059669/ffffff?text=Report+Issue+Screenshot)
+![Issue Reporting Screenshot](frontend/public/citizens%20issue%20report.png)
 *User-friendly interface for reporting new issues with photo upload.*
 
-### Leaderboard
-![Leaderboard Screenshot](https://via.placeholder.com/800x600/dc2626/ffffff?text=Leaderboard+Screenshot)
-*Community leaderboard showcasing top contributors and achievements.*
+### Official Leaderboard Tracker
+![Official Leaderboard Tracker Screenshot](frontend/public/offical%20leaderboard%20tracker.png)
+*Official view of the leaderboard tracking community contributions.*
 
-### Admin Dashboard
-![Admin Dashboard Screenshot](https://via.placeholder.com/800x600/7c3aed/ffffff?text=Admin+Dashboard+Screenshot)
+### Official Dashboard
+![Official Dashboard Screenshot](frontend/public/official%20dashboard.png)
 *Administrative interface for managing issues and monitoring performance.*
 
-### Map View
-![Map View Screenshot](https://via.placeholder.com/800x600/ea580c/ffffff?text=Map+View+Screenshot)
-*Interactive map displaying reported issues geographically.*
+### Official Reported Page
+![Official Reported Page Screenshot](frontend/public/official%20reported%20page.png)
+*Official page showing reported issues and their status.*
 
 ## 🛠️ Technology Stack
 
@@ -233,7 +237,15 @@ City-IssueTracker/
 │   ├── package.json          # Frontend dependencies
 │   └── vite.config.js        # Vite configuration
 ├── .gitignore               # Git ignore rules
-├── screenshots/             # Application screenshots (placeholder images)
+├── frontend/                # React frontend application
+│   ├── public/              # Static assets
+│   │   ├── citizen dashboard.png     # Citizen dashboard screenshot
+│   │   ├── citizen leaderboard.png   # Citizen leaderboard screenshot
+│   │   ├── citizens issue report.png # Issue reporting screenshot
+│   │   ├── offical leaderboard tracker.png # Official leaderboard tracker
+│   │   ├── official dashboard.png    # Official dashboard screenshot
+│   │   └── official reported page.png # Official reported page screenshot
+│   └── ...                  # Other frontend files
 └── README.md                # Project documentation
 ```
 
