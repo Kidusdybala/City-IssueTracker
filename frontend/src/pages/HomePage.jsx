@@ -1,8 +1,40 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Users, TrendingUp, Shield, Camera, Bell } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
 
 const HomePage = () => {
+  const { user, isAdmin } = useAuth();
+
+  // Helper function to get the correct redirect path based on auth status
+  const getPrimaryActionPath = () => {
+    if (user) {
+      return isAdmin ? '/admin' : '/dashboard';
+    }
+    return '/login';
+  };
+
+  const getSecondaryActionPath = () => {
+    if (user) {
+      return isAdmin ? '/admin' : '/report';
+    }
+    return '/login';
+  };
+
+  const getPrimaryActionText = () => {
+    if (user) {
+      return isAdmin ? 'Go to Dashboard' : 'View Dashboard';
+    }
+    return 'Explore Issues';
+  };
+
+  const getSecondaryActionText = () => {
+    if (user) {
+      return isAdmin ? 'Manage Issues' : 'Report Issue';
+    }
+    return 'Get Started';
+  };
+
   const features = [
     {
       icon: Camera,
@@ -68,16 +100,16 @@ const HomePage = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                to="/map"
+                to={user ? getPrimaryActionPath() : "/map"}
                 className="px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg"
               >
-                Explore Issues
+                {user ? getPrimaryActionText() : "Explore Issues"}
               </Link>
               <Link
-                to="/login"
+                to={getSecondaryActionPath()}
                 className="px-8 py-4 bg-gray-800/50 hover:bg-gray-700/50 text-white font-semibold rounded-xl border border-gray-600 transition-all duration-200 backdrop-blur-sm"
               >
-                Get Started
+                {getSecondaryActionText()}
               </Link>
             </div>
           </div>
@@ -177,10 +209,10 @@ const HomePage = () => {
             Join our community and start reporting issues in your neighborhood today.
           </p>
           <Link
-            to="/login"
+            to={getSecondaryActionPath()}
             className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl transition-all duration-200 transform hover:scale-105 shadow-xl"
           >
-            Start Reporting Issues
+            {user ? (isAdmin ? 'Manage Issues' : 'Start Reporting Issues') : 'Start Reporting Issues'}
           </Link>
         </div>
       </div>

@@ -43,6 +43,16 @@ class IssueService {
   }
 
   /**
+   * Get issues by user ID
+   */
+  async getUserIssues(userId, options = {}) {
+    return await this.getIssues(
+      { reporterId: userId },
+      { ...options, populate: ['reporterId'] }
+    );
+  }
+
+  /**
    * Create new issue
    */
   async createIssue(issueData, userId) {

@@ -152,7 +152,7 @@ Ensure MongoDB is running locally or update the `MONGODB_URI` to point to your M
 cd backend
 npm run dev
 ```
-Server will run on `http://localhost:5000`
+Server will run on `http://localhost:5001`
 
 2. **Start Frontend Development Server:**
 ```bash
@@ -174,6 +174,85 @@ npm run build
 cd backend
 npm start
 ```
+
+## 🚀 Deployment
+
+### Backend Deployment (Render)
+
+1. **Create a Render Account:**
+   - Go to [render.com](https://render.com) and create an account
+   - Connect your GitHub repository
+
+2. **Deploy Backend:**
+   - Click "New" → "Web Service"
+   - Connect your GitHub repository
+   - Configure the service:
+     - **Name**: `city-issue-tracker-backend`
+     - **Runtime**: `Node`
+     - **Build Command**: `npm install`
+     - **Start Command**: `npm start`
+
+3. **Environment Variables:**
+   Set these environment variables in Render dashboard:
+   ```env
+   NODE_ENV=production
+   MONGODB_URI=your-mongodb-atlas-connection-string
+   JWT_SECRET=your-super-secret-jwt-key
+   FRONTEND_URL=https://your-vercel-app.vercel.app
+   PORT=10000
+   ```
+
+4. **Database Setup:**
+   - Create a MongoDB Atlas cluster
+   - Get the connection string and add it to `MONGODB_URI`
+   - Make sure your IP is whitelisted in MongoDB Atlas
+
+### Frontend Deployment (Vercel)
+
+1. **Create a Vercel Account:**
+   - Go to [vercel.com](https://vercel.com) and create an account
+   - Connect your GitHub repository
+
+2. **Deploy Frontend:**
+   - Click "Import Project" from your dashboard
+   - Select your GitHub repository
+   - Configure the project:
+     - **Framework Preset**: `Vite`
+     - **Root Directory**: `frontend`
+     - **Build Command**: `npm run build`
+     - **Output Directory**: `dist`
+
+3. **Environment Variables:**
+   Set these environment variables in Vercel dashboard:
+   ```env
+   VITE_API_BASE_URL=https://your-render-backend.onrender.com
+   ```
+
+4. **Update Backend CORS:**
+   After deploying the frontend, update the `FRONTEND_URL` in your Render backend to point to your Vercel app URL.
+
+### Alternative Deployment Options
+
+#### Backend Alternatives:
+- **Railway**: Similar to Render, supports Node.js and MongoDB
+- **Heroku**: Traditional PaaS with good MongoDB support
+- **DigitalOcean App Platform**: Cloud platform with database support
+
+#### Frontend Alternatives:
+- **Netlify**: Great for static sites, supports Vite
+- **GitHub Pages**: Free hosting for static sites
+- **Firebase Hosting**: Google's hosting solution
+
+### Post-Deployment Checklist
+
+- ✅ Test all API endpoints
+- ✅ Verify database connections
+- ✅ Check CORS configuration
+- ✅ Test user authentication
+- ✅ Verify image uploads (if implemented)
+- ✅ Test responsive design on mobile
+- ✅ Check for any console errors
+- ✅ Verify environment variables are set correctly
 
 ## 📖 Usage
 

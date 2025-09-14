@@ -85,7 +85,8 @@ const getIssue = async (req, res) => {
       });
     }
 
-    // Increment view count
+    // Increment view count - using direct model access for this simple operation
+    const Issue = require('../models/Issue');
     await Issue.findByIdAndUpdate(req.params.id, { $inc: { viewCount: 1 } });
 
     res.json({
@@ -108,27 +109,16 @@ const getUserIssues = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 10;
-    const skip = (page - 1) * limit;
 
-    const issues = await Issue.find({ reporterId: req.params.userId })
-      .populate('reporterId', 'name avatar')
-      .sort({ createdAt: -1 })
-      .skip(skip)
-      .limit(limit);
-
-    const total = await Issue.countDocuments({ reporterId: req.params.userId });
+    const result = await issueService.getUserIssues(req.params.userId, {
+      page,
+      limit,
+      sort: { createdAt: -1 }
+    });
 
     res.json({
       success: true,
-      data: {
-        issues,
-        pagination: {
-          page,
-          limit,
-          total,
-          pages: Math.ceil(total / limit)
-        }
-      }
+      data: result
     });
   } catch (error) {
     console.error('Get user issues error:', error);

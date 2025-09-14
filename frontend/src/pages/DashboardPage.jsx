@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Plus, MapPin, Clock, CheckCircle, AlertTriangle, Trophy, Target, Star, Award } from 'lucide-react';
+import { Plus, MapPin, Clock, CheckCircle, AlertTriangle, Trophy } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { useIssues } from '../contexts/IssueContext';
 import { formatDistanceToNow } from 'date-fns';

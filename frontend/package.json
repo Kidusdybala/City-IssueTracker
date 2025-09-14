@@ -1,13 +1,15 @@
 {
-  "name": "vite-react-javascript-starter",
+  "name": "city-issue-tracker-frontend",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "description": "Frontend for City Issue Tracker - A React application for reporting and tracking urban issues",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "vercel-build": "vite build"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.4",

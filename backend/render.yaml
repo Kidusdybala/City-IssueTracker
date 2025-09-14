@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: city-issue-tracker-backend
+    runtime: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false # Set this in Render dashboard
+      - key: JWT_SECRET
+        generateValue: true
+      - key: FRONTEND_URL
+        sync: false # Will be set to Vercel frontend URL
+      - key: PORT
+        value: 10000

@@ -1,140 +1,195 @@
 class IssueService {
-  issues = [
-    {
-      id: '1',
-      title: 'Large pothole on Bole Road',
-      description: 'Deep pothole causing vehicle damage near intersection',
-      category: 'road',
-      status: 'pending',
-      priority: 'high',
-      location: {
-        latitude: 9.1450,
-        longitude: 38.7223,
-        address: '123 Bole Road, , Ethiopia'
-      },
-      photos: ['https://images.pexels.com/photos/2050718/pexels-photo-2050718.jpeg'],
-      reporterId: '1',
-      createdAt: new Date('2024-01-15'),
-      updatedAt: new Date('2024-01-15'),
-    },
-    {
-      id: '2',
-      title: 'Broken streetlight',
-      description: 'Street light has been out for 3 days, affecting visibility',
-      category: 'electricity',
-      status: 'in-progress',
-      priority: 'medium',
-      location: {
-        latitude: 9.1500,
-        longitude: 38.7300,
-        address: '456 Churchill Avenue, , Ethiopia'
-      },
-      photos: ['https://images.pexels.com/photos/2346091/pexels-photo-2346091.jpeg'],
-      reporterId: '1',
-      assignedTo: '2',
-      createdAt: new Date('2024-01-14'),
-      updatedAt: new Date('2024-01-16'),
-    },
-    {
-      id: '3',
-      title: 'Overflowing trash bin',
-      description: 'Public trash bin is completely full and overflowing',
-      category: 'waste',
-      status: 'resolved',
-      priority: 'low',
-      location: {
-        latitude: 9.1400,
-        longitude: 38.7200,
-        address: '789 Piazza, , Ethiopia'
-      },
-      photos: ['https://images.pexels.com/photos/2106037/pexels-photo-2106037.jpeg'],
-      reporterId: '1',
-      assignedTo: '2',
-      createdAt: new Date('2024-01-13'),
-      updatedAt: new Date('2024-01-17'),
-      resolvedAt: new Date('2024-01-17'),
-      resolutionProof: ['https://images.pexels.com/photos/1884598/pexels-photo-1884598.jpeg']
-    }
-  ];
-
-  async getAllIssues() {
-    await this.delay(500);
-    return [...this.issues].sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
+  constructor() {
+    this.baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001';
   }
 
-  async createIssue(data) {
-    await this.delay(500);
-
-    // Simulate photo upload
-    const photoUrls = data.photos.map(() =>
-      'https://images.pexels.com/photos/2050718/pexels-photo-2050718.jpeg'
-    );
-
-    const newIssue = {
-      id: Date.now().toString(),
-      title: data.title,
-      description: data.description,
-      category: data.category,
-      status: 'pending',
-      priority: 'medium',
-      location: data.location,
-      photos: photoUrls,
-      reporterId: '1', // In real app, get from auth context
-      createdAt: new Date(),
-      updatedAt: new Date(),
+  // Helper method to get auth headers
+  getAuthHeaders() {
+    const token = localStorage.getItem('token');
+    return {
+      'Authorization': token ? `Bearer ${token}` : '',
+      'Content-Type': 'application/json',
     };
+  }
 
-    this.issues.push(newIssue);
-    return newIssue;
+  async getAllIssues(params = {}) {
+    try {
+      const queryString = new URLSearchParams(params).toString();
+      const url = `${this.baseURL}/api/issues${queryString ? `?${queryString}` : ''}`;
+
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: this.getAuthHeaders(),
+        credentials: 'include',
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to fetch issues');
+      }
+
+      return data.data.issues;
+    } catch (error) {
+      console.error('Get all issues error:', error);
+      throw error;
+    }
+  }
+
+  async createIssue(issueData) {
+    try {
+      const response = await fetch(`${this.baseURL}/api/issues`, {
+        method: 'POST',
+        headers: this.getAuthHeaders(),
+        credentials: 'include',
+        body: JSON.stringify(issueData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to create issue');
+      }
+
+      return data.data.issue;
+    } catch (error) {
+      console.error('Create issue error:', error);
+      throw error;
+    }
   }
 
   async updateIssueStatus(id, status) {
-    await this.delay(300);
-    const issue = this.issues.find(i => i.id === id);
-    if (issue) {
-      issue.status = status;
-      issue.updatedAt = new Date();
-      if (status === 'resolved') {
-        issue.resolvedAt = new Date();
+    try {
+      const response = await fetch(`${this.baseURL}/api/issues/${id}`, {
+        method: 'PUT',
+        headers: this.getAuthHeaders(),
+        credentials: 'include',
+        body: JSON.stringify({ status }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to update issue status');
       }
+
+      return data.data.issue;
+    } catch (error) {
+      console.error('Update issue status error:', error);
+      throw error;
     }
   }
 
   async updateIssuePriority(id, priority) {
-    await this.delay(300);
-    const issue = this.issues.find(i => i.id === id);
-    if (issue) {
-      issue.priority = priority;
-      issue.updatedAt = new Date();
+    try {
+      const response = await fetch(`${this.baseURL}/api/issues/${id}`, {
+        method: 'PUT',
+        headers: this.getAuthHeaders(),
+        credentials: 'include',
+        body: JSON.stringify({ priority }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to update issue priority');
+      }
+
+      return data.data.issue;
+    } catch (error) {
+      console.error('Update issue priority error:', error);
+      throw error;
     }
   }
 
-  async assignIssue(id, assigneeId) {
-    await this.delay(300);
-    const issue = this.issues.find(i => i.id === id);
-    if (issue) {
-      issue.assignedTo = assigneeId;
-      issue.status = 'in-progress';
-      issue.updatedAt = new Date();
+  async upvoteIssue(id) {
+    try {
+      const response = await fetch(`${this.baseURL}/api/issues/${id}/upvote`, {
+        method: 'POST',
+        headers: this.getAuthHeaders(),
+        credentials: 'include',
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to upvote issue');
+      }
+
+      return data;
+    } catch (error) {
+      console.error('Upvote issue error:', error);
+      throw error;
     }
   }
 
-  async resolveIssue(id, resolutionProof) {
-    await this.delay(500);
-    const issue = this.issues.find(i => i.id === id);
-    if (issue) {
-      issue.status = 'resolved';
-      issue.resolvedAt = new Date();
-      issue.updatedAt = new Date();
-      // Simulate proof upload
-      issue.resolutionProof = resolutionProof.map(() =>
-        'https://images.pexels.com/photos/1884598/pexels-photo-1884598.jpeg'
-      );
+  async addComment(id, content) {
+    try {
+      const response = await fetch(`${this.baseURL}/api/issues/${id}/comments`, {
+        method: 'POST',
+        headers: this.getAuthHeaders(),
+        credentials: 'include',
+        body: JSON.stringify({ content }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to add comment');
+      }
+
+      return data;
+    } catch (error) {
+      console.error('Add comment error:', error);
+      throw error;
     }
   }
 
-  delay(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+  async getUserIssues(userId, params = {}) {
+    try {
+      const queryString = new URLSearchParams(params).toString();
+      const url = `${this.baseURL}/api/issues/user/${userId}${queryString ? `?${queryString}` : ''}`;
+
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: this.getAuthHeaders(),
+        credentials: 'include',
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to fetch user issues');
+      }
+
+      return data.data.issues;
+    } catch (error) {
+      console.error('Get user issues error:', error);
+      throw error;
+    }
+  }
+
+  async getIssueStats() {
+    try {
+      const response = await fetch(`${this.baseURL}/api/issues/stats`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to fetch issue stats');
+      }
+
+      return data.data;
+    } catch (error) {
+      console.error('Get issue stats error:', error);
+      throw error;
+    }
   }
 }
 

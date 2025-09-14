@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trophy, Medal, Award, Star, Crown, Target, TrendingUp } from 'lucide-react';
+import { Trophy, Award, Star, Crown, Target, TrendingUp } from 'lucide-react';
 
 const LeaderboardPage = () => {
   // Mock leaderboard data

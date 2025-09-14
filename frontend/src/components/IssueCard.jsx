@@ -1,7 +1,6 @@
 import React from 'react';
 import { MapPin, Clock, User, AlertCircle } from 'lucide-react';
-import { ISSUE_STATUSES, ISSUE_PRIORITIES } from '../constants/categories';
-import { formatRelativeTime, getStatusColor, getPriorityColor } from '../utils/helpers';
+import { formatDistanceToNow } from 'date-fns';
 import clsx from 'clsx';
 
 const IssueCard = ({
@@ -10,7 +9,25 @@ const IssueCard = ({
   onStatusUpdate,
   onPriorityUpdate
 }) => {
-  // Using helper functions for consistent styling
+  const getStatusColor = (status) => {
+    const colors = {
+      pending: 'from-yellow-500/20 to-yellow-600/20 border-yellow-500/30 text-yellow-300',
+      'in-progress': 'from-blue-500/20 to-blue-600/20 border-blue-500/30 text-blue-300',
+      resolved: 'from-green-500/20 to-green-600/20 border-green-500/30 text-green-300',
+      rejected: 'from-red-500/20 to-red-600/20 border-red-500/30 text-red-300',
+    };
+    return colors[status] || colors.pending;
+  };
+
+  const getPriorityColor = (priority) => {
+    const colors = {
+      low: 'text-gray-400',
+      medium: 'text-yellow-400',
+      high: 'text-orange-400',
+      urgent: 'text-red-400',
+    };
+    return colors[priority] || colors.medium;
+  };
 
   const categoryIcons = {
     road: '🛣️',
@@ -46,7 +63,7 @@ const IssueCard = ({
           </div>
           <div className="flex items-center space-x-1">
             <Clock className="h-4 w-4" />
-            <span>{formatRelativeTime(issue.createdAt)}</span>
+            <span>{formatDistanceToNow(new Date(issue.createdAt), { addSuffix: true })}</span>
           </div>
         </div>
         

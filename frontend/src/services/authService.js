@@ -1,91 +1,131 @@
 class AuthService {
-  users = [
-    {
-      id: '1',
-      email: 'citizen@example.com',
-      name: 'Abebe Tadesse',
-      role: 'citizen',
-      points: 150,
-      badges: [
-        {
-          id: '1',
-          name: 'First Reporter',
-          description: 'Reported your first issue',
-          icon: '🏆',
-          earnedAt: new Date('2024-01-01'),
-        }
-      ],
-      createdAt: new Date('2024-01-01'),
-    },
-    {
-      id: '2',
-      email: 'official@city.gov',
-      name: ' Official',
-      role: 'admin',
-      points: 0,
-      badges: [],
-      createdAt: new Date('2024-01-01'),
-    }
-  ];
-
-  async login(credentials) {
-    await this.delay(500); // Simulate network delay
-
-    const user = this.users.find(u => u.email === credentials.email);
-    if (!user) {
-      throw new Error('Invalid credentials');
-    }
-
-    // In a real app, verify password here
-    localStorage.setItem('currentUser', JSON.stringify(user));
-    return user;
+  constructor() {
+    this.baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001';
   }
 
-  async signup(data) {
-    await this.delay(500);
+  async login(credentials) {
+    try {
+      const response = await fetch(`${this.baseURL}/api/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify(credentials),
+      });
 
-    if (this.users.some(u => u.email === data.email)) {
-      throw new Error('Email already exists');
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Login failed');
+      }
+
+      // Store token in localStorage
+      if (data.data?.token) {
+        localStorage.setItem('token', data.data.token);
+      }
+
+      return data.data.user;
+    } catch (error) {
+      console.error('Login error:', error);
+      throw error;
     }
+  }
 
-    const newUser = {
-      id: Date.now().toString(),
-      email: data.email,
-      name: data.name,
-      role: data.role,
-      points: 0,
-      badges: [],
-      createdAt: new Date(),
-    };
+  async signup(userData) {
+    try {
+      const response = await fetch(`${this.baseURL}/api/auth/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify(userData),
+      });
 
-    this.users.push(newUser);
-    localStorage.setItem('currentUser', JSON.stringify(newUser));
-    return newUser;
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Registration failed');
+      }
+
+      // Store token in localStorage
+      if (data.data?.token) {
+        localStorage.setItem('token', data.data.token);
+      }
+
+      return data.data.user;
+    } catch (error) {
+      console.error('Signup error:', error);
+      throw error;
+    }
   }
 
   async getCurrentUser() {
-    const userData = localStorage.getItem('currentUser');
-    if (userData) {
-      const user = JSON.parse(userData);
-      // Update old names to new Ethiopian names
-      if (user.name === 'John Citizen') {
-        user.name = 'Abebe Tadesse';
-        localStorage.setItem('currentUser', JSON.stringify(user));
-      } else if (user.name === 'City Official') {
-        user.name = 'Addis Ababa Official';
-        localStorage.setItem('currentUser', JSON.stringify(user));
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) return null;
+
+      const response = await fetch(`${this.baseURL}/api/auth/me`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        // Token might be expired
+        this.logout();
+        return null;
       }
-      return user;
+
+      return data.data.user;
+    } catch (error) {
+      console.error('Get current user error:', error);
+      this.logout();
+      return null;
     }
-    return null;
+  }
+
+  async getLeaderboard() {
+    try {
+      const response = await fetch(`${this.baseURL}/api/auth/leaderboard`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to fetch leaderboard');
+      }
+
+      return data.data.leaderboard;
+    } catch (error) {
+      console.error('Leaderboard error:', error);
+      throw error;
+    }
   }
 
   logout() {
+    localStorage.removeItem('token');
     localStorage.removeItem('currentUser');
   }
 
-  delay(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+  // Helper method to get auth headers
+  getAuthHeaders() {
+    const token = localStorage.getItem('token');
+    return {
+      'Authorization': token ? `Bearer ${token}` : '',
+      'Content-Type': 'application/json',
+    };
   }
 }
 
