@@ -1,6 +1,12 @@
-# City Issue Tracker
+<p align="center">
+  <img src="frontend/logo.png" alt="City Issue Tracker Logo" width="200" height="200">
+</p>
 
-A comprehensive MERN stack application designed to streamline citizen-city government communication for reporting and resolving urban issues. This platform enables citizens to report problems while providing city officials with powerful tools to manage and resolve issues efficiently.
+<h1 align="center">City Issue Tracker</h1>
+
+<p align="center">
+  A comprehensive MERN stack application designed to streamline citizen-city government communication for reporting and resolving urban issues. This platform enables citizens to report problems while providing city officials with powerful tools to manage and resolve issues efficiently.
+</p>
 
 ## 🚀 Features
 
@@ -26,6 +32,28 @@ A comprehensive MERN stack application designed to streamline citizen-city gover
 - **Real-time Updates**: Live status tracking and notifications
 - **Responsive Design**: Optimized for desktop and mobile devices
 - **Data Security**: Encrypted authentication and secure data handling
+
+## 📸 Screenshots
+
+### Dashboard
+![Dashboard Screenshot](https://via.placeholder.com/800x600/4f46e5/ffffff?text=Dashboard+Screenshot)
+*The main dashboard showing user statistics, recent reports, and achievements.*
+
+### Issue Reporting
+![Report Issue Screenshot](https://via.placeholder.com/800x600/059669/ffffff?text=Report+Issue+Screenshot)
+*User-friendly interface for reporting new issues with photo upload.*
+
+### Leaderboard
+![Leaderboard Screenshot](https://via.placeholder.com/800x600/dc2626/ffffff?text=Leaderboard+Screenshot)
+*Community leaderboard showcasing top contributors and achievements.*
+
+### Admin Dashboard
+![Admin Dashboard Screenshot](https://via.placeholder.com/800x600/7c3aed/ffffff?text=Admin+Dashboard+Screenshot)
+*Administrative interface for managing issues and monitoring performance.*
+
+### Map View
+![Map View Screenshot](https://via.placeholder.com/800x600/ea580c/ffffff?text=Map+View+Screenshot)
+*Interactive map displaying reported issues geographically.*
 
 ## 🛠️ Technology Stack
 
@@ -205,6 +233,7 @@ City-IssueTracker/
 │   ├── package.json          # Frontend dependencies
 │   └── vite.config.js        # Vite configuration
 ├── .gitignore               # Git ignore rules
+├── screenshots/             # Application screenshots (placeholder images)
 └── README.md                # Project documentation
 ```
 
